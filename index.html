@@ -1,8 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Fantasy Draft Assistant</title>
+</head>
+
+<body>
+
+<h1>Fantasy Draft Assistant</h1>
+
+<div id="history">
+Current Picks:
+</div>
+
+<div id="options">
+</div>
 
 <script>
 
 const SHEET_URL = "REPLACE_WITH_GOOGLE_SHEET_CSV_URL";
-    
+
 const data = {
     "START": ["A01", "A02", "A03", "A04"],
 
@@ -39,7 +56,7 @@ function showOptions(key) {
             picks.push(option);
 
             historyDiv.innerHTML =
-                "Current Picks:" +
+                "Current Picks:<br>" +
                 picks.join(" → ");
 
             showOptions(option);
