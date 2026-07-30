@@ -1,3 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Fantasy Draft Assistant</title>
+</head>
+
+<body>
+
+<h1>Fantasy Draft Assistant</h1>
+
+<div id="history">
+Current Picks:
+</div>
+
+<div id="options">
+</div>
+
 <script>
 
 const data = {
@@ -6,27 +24,7 @@ const data = {
     "A01": ["B01", "B02", "B03", "B04"],
     "A02": ["B05", "B06", "B07", "B08"],
     "A03": ["B09", "B10", "B11", "B12"],
-    "A04": ["B13", "B14", "B15", "B16"],
-
-    "B01": ["C01", "C02", "C03", "C04"],
-    "B02": ["C05", "C06", "C07", "C08"],
-    "B03": ["C09", "C10", "C11", "C12"],
-    "B04": ["C13", "C14", "C15", "C16"],
-
-    "B05": ["C17", "C18", "C19", "C20"],
-    "B06": ["C21", "C22", "C23", "C24"],
-    "B07": ["C25", "C26", "C27", "C28"],
-    "B08": ["C29", "C30", "C31", "C32"],
-
-    "B09": ["C33", "C34", "C35", "C36"],
-    "B10": ["C37", "C38", "C39", "C40"],
-    "B11": ["C41", "C42", "C43", "C44"],
-    "B12": ["C45", "C46", "C47", "C48"],
-
-    "B13": ["C49", "C50", "C51", "C52"],
-    "B14": ["C53", "C54", "C55", "C56"],
-    "B15": ["C57", "C58", "C59", "C60"],
-    "B16": ["C61", "C62", "C63", "C64"]
+    "A04": ["B13", "B14", "B15", "B16"]
 };
 
 const optionsDiv = document.getElementById("options");
@@ -56,7 +54,7 @@ function showOptions(key) {
             picks.push(option);
 
             historyDiv.innerHTML =
-                "Current Picks:" +
+                "Current Picks:<br>" +
                 picks.join(" → ");
 
             showOptions(option);
@@ -69,3 +67,6 @@ function showOptions(key) {
 showOptions("START");
 
 </script>
+
+</body>
+</html>
