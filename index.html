@@ -15,7 +15,8 @@ const data = {
 
     "B05": ["C17", "C18", "C19", "C20"],
     "B06": ["C21", "C22", "C23", "C24"],
-    "B07":["C13", "C14", "C15", "C16 "22     "B08": ["C29", "C30", "C31", "C32"],
+    "B07": ["C25", "C26", "C27", "C28"],
+    "B08": ["C29", "C30", "C31", "C32"],
 
     "B09": ["C33", "C34", "C35", "C36"],
     "B10": ["C37", "C38", "C39", "C40"],
@@ -55,7 +56,7 @@ function showOptions(key) {
             picks.push(option);
 
             historyDiv.innerHTML =
-                "Current Picks:<br>" +
+                "Current Picks:" +
                 picks.join(" → ");
 
             showOptions(option);
