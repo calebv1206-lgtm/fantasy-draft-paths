@@ -53,16 +53,18 @@ Promise.all([
         });
 
     playersCsv
-        .trim()
-        .split("\n")
-        .slice(1)
-        .forEach(row => {
+    .trim()
+    .split("\n")
+    .slice(1)
+    .forEach(row => {
 
-            const cols = row.split(",");
+        const cols = row.split(",");
 
-            players[cols[0].trim()] =
-                cols[1].trim();
-        });
+        if (cols.length < 2) return;
+
+        players[cols[0].trim()] =
+            cols[1].trim();
+    });
 
     showOptions("START");
 });
