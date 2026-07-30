@@ -1,47 +1,30 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Fantasy Draft Assistant</title>
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 600px;
-            margin: auto;
-            padding: 20px;
-        }
-
-        button {
-            width: 100%;
-            padding: 12px;
-            margin: 5px 0;
-            font-size: 18px;
-        }
-    </style>
-</head>
-
-<body>
-
-<h1>Fantasy Draft Assistant</h1>
-
-<div id="history">
-Current Picks:
-</div>
-
-<hr>
-
-<div id="options">
-</div>
-
 <script>
+
+const data = {
+    "START": ["A01", "A02", "A03", "A04"],
+
+    "A01": ["B01", "B02", "B03", "B04"],
+    "A02": ["B05", "B06", "B07", "B08"],
+    "A03": ["B09", "B10", "B11", "B12"],
+    "A04["B05", "B06", "B07", "B08B10", "B11  "B01": ["C01", "C02", "C03", "C04"],
+    "B02": ["["B13", "B14", "B15", "B16",C05", "01": ["D01", "D02", "D03", "D04"]
+};
 
 const optionsDiv = document.getElementById("options");
 const historyDiv = document.getElementById("history");
 
-function showOptions(options) {
+let picks = [];
+
+function showOptions(key) {
 
     optionsDiv.innerHTML = "";
+
+    const options = data[key];
+
+    if (!options) {
+        optionsDiv.innerHTML = "<h3>End of Branch</h3>";
+        return;
+    }
 
     options.forEach(option => {
 
@@ -51,29 +34,19 @@ function showOptions(options) {
 
         btn.onclick = () => {
 
-            historyDiv.innerHTML =
-                "Last Pick: " + option;
+            picks.push(option);
 
-            showOptions([
-                option + "-1",
-                option + "-2",
-                option + "-3",
-                option + "-4"
-            ]);
+            historyDiv.innerHTML =
+                "Current Picks:<br>" +
+                picks.join(" → ");
+
+            showOptions(option);
         };
 
         optionsDiv.appendChild(btn);
     });
 }
 
-showOptions([
-    "A01",
-    "A02",
-    "A03",
-    "A04"
-]);
+showOptions("START");
 
 </script>
-
-</body>
-</html>
