@@ -1,92 +1,121 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <style>
 <style>
 
 body {
     font-family: Arial, sans-serif;
-    max-width: 700px;
+    max-width: 800px;
     margin: auto;
     padding: 20px;
-
-    background:
-        linear-gradient(
-            180deg,
-            #0a0a0a 0%,
-            #111111 50%,
-            #000000 100%
-        );
 
     color: white;
     min-height: 100vh;
     position: relative;
+
+    background:
+        linear-gradient(
+            180deg,
+            #050505 0%,
+            #0d0d0d 50%,
+            #000000 100%
+        );
+}
+
+/* Football field texture */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+
+    opacity: 0.04;
+
+    background-image:
+        repeating-linear-gradient(
+            90deg,
+            rgba(255,255,255,.5) 0px,
+            rgba(255,255,255,.5) 2px,
+            transparent 2px,
+            transparent 80px
+        );
 }
 
 h1 {
     text-align: center;
-    color: #6ccf6c;
+    color: white;
     margin-bottom: 10px;
+    letter-spacing: 1px;
 }
 
 .subtitle {
     text-align: center;
-    color: #9edb9e;
+    color: #cccccc;
     margin-bottom: 25px;
-    font-size: 18px;
 }
 
+/* Current picks box */
 #history {
     background:
         linear-gradient(
             180deg,
-            #1c2f1c,
-            #152515
+            #214021,
+            #152915
         );
 
+    color: white;
+
     padding: 15px;
+
     border-radius: 12px;
 
-    border: 1px solid #355935;
+    border: 1px solid #3f7f3f;
 
     box-shadow:
-        0 4px 12px rgba(0,0,0,.4);
+        0 4px 15px rgba(0,0,0,.4);
 
     margin-bottom: 20px;
 }
 
+/* Draft buttons */
 button {
     width: 100%;
+
     padding: 16px;
+
     margin: 8px 0;
 
-    border: none;
-    border-radius: 12px;
+    border: 1px solid #4e9d4e;
 
-    color: white;
-    font-size: 18px;
-    font-weight: bold;
-    cursor: pointer;
+    border-radius: 12px;
 
     background:
         linear-gradient(
             180deg,
-            #3f8a3f,
-            #2e7d32
+            #347534,
+            #245724
         );
 
-    box-shadow:
-        0 4px 8px rgba(0,0,0,.35);
+    color: white;
 
-    transition: all .2s ease;
+    font-size: 18px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 4px 10px rgba(0,0,0,.35);
+
+    transition: all .15s ease;
 }
 
 button:hover {
     background:
         linear-gradient(
             180deg,
-            #4da64d,
-            #388e3c
+            #3f8d3f,
+            #2c6a2c
         );
 
     transform: translateY(-2px);
@@ -96,12 +125,19 @@ button:active {
     transform: translateY(1px);
 }
 
+/* End of branch message */
 h3 {
     text-align: center;
-    color: #9edb9e;
+    color: white;
 }
 
-</style>
+/* Thin divider */
+hr {
+    border: none;
+    border-top: 1px solid #2a2a2a;
+    margin: 20px 0;
+}
+
 </style>
     <meta charset="UTF-8">
     <title>Fantasy Draft Assistant</title>
@@ -110,6 +146,10 @@ h3 {
 <body>
 
 <h1>🏈 Fantasy Draft Assistant</h1>
+
+<div class="subtitle">
+Personal Draft Planner
+</div>
 
 <div class="subtitle">
 Draft Path Planner
