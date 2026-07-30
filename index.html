@@ -38,6 +38,7 @@ Promise.all([
     pathsCsv
         .trim()
         .split("\n")
+        .slice(1)
         .forEach(row => {
 
             const cols = row.split(",");
@@ -58,7 +59,7 @@ Promise.all([
     .slice(1)
     .forEach(row => {
 
-        const cols = row.split("\t");
+        const cols = row.split(",");
 
         if (cols.length < 2) return;
 
@@ -68,6 +69,8 @@ Promise.all([
     
 console.log(players);
 console.log(players["A01"]);
+console.log(data);
+console.log(data["START"]);
     
     showOptions("START");
 });
