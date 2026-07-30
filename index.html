@@ -3,32 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Fantasy Draft Assistant</title>
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 600px;
-            margin: 20px auto;
-            padding: 20px;
-        }
-
-        h1 {
-            text-align: center;
-        }
-
-        button {
-            width: 100%;
-            padding: 15px;
-            margin: 5px 0;
-            font-size: 18px;
-            cursor: pointer;
-        }
-
-        #history {
-            margin-bottom: 20px;
-            font-weight: bold;
-        }
-    </style>
 </head>
 
 <body>
@@ -36,65 +10,27 @@
 <h1>Fantasy Draft Assistant</h1>
 
 <div id="history">
-    Current Picks:
+Current Picks:
 </div>
 
-<div id="options"></div>
+<div id="options">
+</div>
 
 <script>
 
-const data = {
-    "START": ["A01", "A02", "A03", "A04"],
+document.getElementById("history").innerHTML =
+    "Website is working";
 
-    "A01": ["B01", "B02", "B03", "B04"],
-    "A02": ["B05", "B06", "B07", "B08"],
-    "A03": ["B09", "B10", "B11", "B12"],
-    "A04": ["B13", "B14", "B15", "B16"],
+const optionsDiv =
+    document.getElementById("options");
 
-    "B01": ["C01", "C02", "C03", "C04"],
-    "B02": ["C05", "C06", "C07", "C08"],
+const btn =
+    document.createElement("button");
 
-    "C01": ["D01", "D02", "D03", "D04"]
-};
+btn.textContent =
+    "Test Button";
 
-const historyDiv = document.getElementById("history");
-const optionsDiv = document.getElementById("options");
-
-let picks = [];
-
-function showOptions(key) {
-
-    optionsDiv.innerHTML = "";
-
-    const options = data[key];
-
-    if (!options) {
-        optionsDiv.innerHTML = "<h3>End of Branch</h3>";
-        return;
-    }
-
-    options.forEach(option => {
-
-        const button = document.createElement("button");
-
-        button.textContent = option;
-
-        button.onclick = () => {
-
-            picks.push(option);
-
-            historyDiv.innerHTML =
-                "Current Picks:<br>" +
-                picks.join(" → ");
-
-            showOptions(option);
-        };
-
-        optionsDiv.appendChild(button);
-    });
-}
-
-showOptions("START");
+optionsDiv.appendChild(btn);
 
 </script>
 
