@@ -14,23 +14,29 @@ body {
     position: relative;
 
     background:
+        radial-gradient(
+            circle at center,
+            rgba(46,125,50,.40) 0%,
+            rgba(46,125,50,.18) 25%,
+            rgba(0,0,0,.95) 70%
+        ),
         linear-gradient(
             180deg,
             #050505 0%,
-            #0d0d0d 50%,
+            #0b0b0b 50%,
             #000000 100%
         );
 }
 
-/* Football field texture */
+/* Football field lines */
 body::before {
     content: "";
     position: fixed;
     inset: 0;
     pointer-events: none;
-    z-index: -1;
+    z-index: -2;
 
-    opacity: 0.04;
+    opacity: 0.05;
 
     background-image:
         repeating-linear-gradient(
@@ -40,6 +46,26 @@ body::before {
             transparent 2px,
             transparent 80px
         );
+}
+
+/* Dot texture */
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+
+    opacity: 0.04;
+
+    background-image:
+        radial-gradient(
+            circle,
+            #6ccf6c 1px,
+            transparent 1px
+        );
+
+    background-size: 24px 24px;
 }
 
 h1 {
@@ -55,7 +81,7 @@ h1 {
     margin-bottom: 25px;
 }
 
-/* Current picks box */
+/* Current Picks box */
 #history {
     background:
         linear-gradient(
@@ -125,13 +151,11 @@ button:active {
     transform: translateY(1px);
 }
 
-/* End of branch message */
 h3 {
     text-align: center;
     color: white;
 }
 
-/* Thin divider */
 hr {
     border: none;
     border-top: 1px solid #2a2a2a;
@@ -139,6 +163,7 @@ hr {
 }
 
 </style>
+
     <meta charset="UTF-8">
     <title>Fantasy Draft Assistant</title>
 </head>
