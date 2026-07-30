@@ -1,58 +1,109 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Fantasy Draft Tree</title>
+<meta charset="UTF-8">
+<title>Fantasy Draft Tree</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+}
+
+button {
+    width: 100%;
+    margin: 5px 0;
+    padding: 15px;
+    font-size: 18px;
+}
+
+#history {
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+</style>
+
 </head>
 <body>
- 
+
 <h1>Fantasy Draft Tree</h1>
- 
-<input id="pathInput" placeholder="Enter Path">
- 
-<button onclick="findPath()">Search</button>
- 
-<h2>Recommendations</h2>
- 
-<ul id="results"></ul>
- 
+
+<div id="history">
+Current Path:
+</div>
+
+<div id="options"></div>
+
 <script>
- 
-const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQJLZNqaVvmshK7mTgtfDcM-0uOILEaD2UW92QKiOFtiTEfkOx-uNaMAj4xdPgXhGEzsEOwrdnohjUJ/pub?output=csv";
- 
+
+const SHEET_URL =
+"https://docs.google.com/spreadsheets/d/e/2PACX-1vQJLZNqaVvmshK7mTgtfDcM-0uOILEaD2UW92QKiOFtiTEfkOx-uNaMAj4xdPgXhGEzsEOwrdnohjUJ/pub?output=csv";
+
 let rows = [];
- 
+let currentPath = "";
+
 fetch(SHEET_URL)
 .then(r => r.text())
 .then(data => {
-    rows = data.split('\n').slice(1).map(row => row.split(','));
+
+    rows = data
+        .trim()
+        .split('\n')
+        .slice(1)
+        .map(row => row.split(','));
+
+    showOptions("");
 });
- 
-function findPath() {
- 
-    const path = document
-      .getElementById("pathInput")
-      .value
-      .trim();
- 
-    const row = rows.find(r => r[0] === path);
- 
-    const results = document.getElementById("results");
- 
-    results.innerHTML = "";
- 
-    if(!row){
-        results.innerHTML = "<li>No Match Found</li>";
+
+function showOptions(path){
+
+    document.getElementById("history").innerHTML =
+        "Current Path: " + (path || "Start");
+
+    let row;
+
+    if(path === "") {
+        row = rows[0];
+    } else {
+        row = rows.find(r => r[0] === path);
+    }
+
+    const optionsDiv =
+        document.getElementById("options");
+
+    optionsDiv.innerHTML = "";
+
+    if(!row) {
+        optionsDiv.innerHTML =
+            "<h3>No further recommendations.</h3>";
         return;
     }
- 
-    results.innerHTML =
-        `<li>${row[1]}</li>
-         <li>${row[2]}</li>
-         <li>${row[3]}</li>`;
+
+    for(let i=1;i<=3;i++){
+
+        if(!row[i]) continue;
+
+        const btn = document.createElement("button");
+
+        btn.textContent = row[i];
+
+        btn.onclick = () => {
+
+            currentPath =
+                currentPath
+                ? currentPath + ">" + row[i]
+                : row[i];
+
+            showOptions(currentPath);
+        };
+
+        optionsDiv.appendChild(btn);
+    }
 }
- 
+
 </script>
- 
+
 </body>
 </html>
-
