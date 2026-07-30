@@ -1,38 +1,40 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Fantasy Draft Assistant</title>
-</head>
-
-<body>
-
-<h1>Fantasy Draft Assistant</h1>
-
-<div id="history">
-Current Picks:
-</div>
-
-<div id="options">
-</div>
-
 <script>
 
-document.getElementById("history").innerHTML =
-    "Website is working";
+const optionsDiv = document.getElementById("options");
+const historyDiv = document.getElementById("history");
 
-const optionsDiv =
-    document.getElementById("options");
+function showOptions(options) {
 
-const btn =
-    document.createElement("button");
+    optionsDiv.innerHTML = "";
 
-btn.textContent =
-    "Test Button";
+    options.forEach(option => {
 
-optionsDiv.appendChild(btn);
+        const btn = document.createElement("button");
+
+        btn.textContent = option;
+
+        btn.onclick = () => {
+
+            historyDiv.innerHTML =
+                "You selected: " + option;
+
+            showOptions([
+                option + "-1",
+                option + "-2",
+                option + "-3",
+                option + "-4"
+            ]);
+        };
+
+        optionsDiv.appendChild(btn);
+    });
+}
+
+showOptions([
+    "A01",
+    "A02",
+    "A03",
+    "A04"
+]);
 
 </script>
-
-</body>
-</html>
