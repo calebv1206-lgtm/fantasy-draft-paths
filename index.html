@@ -18,38 +18,58 @@ Current Picks:
 
 <script>
 
-const SHEET_URL = "./draftpaths.csv";
+const PATHS_URL = "./draftpaths.csv";
+const PLAYERS_URL = "./players.csv";
 
 let data = {};
-
-fetch(SHEET_URL)
-  .then(response => response.text())
-  .then(csv => {
-
-    const rows = csv.trim().split("\n");
-
-    rows.slice(1).forEach(row => {
-
-      const cols = row.split("\t");
-
-      const key = cols[0].trim();
-
-      const options = cols
-        .slice(1)
-        .map(x => x.trim())
-        .filter(x => x !== "");
-
-      data[key] = options;
-    });
-console.log(data);
-console.log(data["START"]);
-    showOptions("START");
-  });
+let players = {};
 
 const optionsDiv = document.getElementById("options");
 const historyDiv = document.getElementById("history");
 
 let picks = [];
+
+Promise.all([
+    fetch(PATHS_URL).then(r => r.text()),
+    fetch(PLAYERS_URL).then(r => r.text())
+])
+.then(([pathsCsv, playersCsv]) => {
+
+    pathsCsv
+        .trim()
+        .split("\n")
+        .forEach(row => {
+
+            const cols = row.split(",");
+
+            const key = cols[0].trim();
+
+            const options = cols
+                .slice(1)
+                .map(x => x.trim())
+                .filter(x => x);
+
+            data[key] = options;
+        });
+
+    playersCsv
+        .trim()
+        .split("\n")
+        .slice(1)
+        .forEach(row => {
+
+            const cols = row.split(",");
+
+            players[cols[0].trim()] =
+                cols[1].trim();
+        });
+
+    showOptions("START");
+});
+
+function playerName(id) {
+    return players[id] || id;
+}
 
 function showOptions(key) {
 
@@ -66,11 +86,11 @@ function showOptions(key) {
 
         const btn = document.createElement("button");
 
-        btn.textContent = option;
+        btn.textContent = playerName(option);
 
         btn.onclick = () => {
 
-            picks.push(option);
+            picks.push(playerName(option));
 
             historyDiv.innerHTML =
                 "Current Picks:<br>" +
@@ -84,6 +104,6 @@ function showOptions(key) {
 }
 
 </script>
-
+    
 </body>
 </html>
