@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fantasy Draft Tree</title>
+</head>
+<body>
+ 
+<h1>Fantasy Draft Tree</h1>
+ 
+<input id="pathInput" placeholder="Enter Path">
+ 
+<button onclick="findPath()">Search</button>
+ 
+<h2>Recommendations</h2>
+ 
+<ul id="results"></ul>
+ 
+<script>
+ 
+const SHEET_URL = "PASTE_YOUR_CSV_URL_HERE";
+ 
+let rows = [];
+ 
+fetch(SHEET_URL)
+.then(r => r.text())
+.then(data => {
+    rows = data.split('\n').slice(1).map(row => row.split(','));
+});
+ 
+function findPath() {
+ 
+    const path = document
+      .getElementById("pathInput")
+      .value
+      .trim();
+ 
+    const row = rows.find(r => r[0] === path);
+ 
+    const results = document.getElementById("results");
+ 
+    results.innerHTML = "";
+ 
+    if(!row){
+        results.innerHTML = "<li>No Match Found</li>";
+        return;
+    }
+ 
+    results.innerHTML =
+        `<li>${row[1]}</li>
+         <li>${row[2]}</li>
+         <li>${row[3]}</li>`;
+}
+ 
+</script>
+ 
+</body>
+</html>
+
