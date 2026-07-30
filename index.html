@@ -1,56 +1,12 @@
 <script>
-
-const SHEET_URL =
-"./draftpaths.csv";
-
-let rows = [];
-
-fetch(SHEET_URL)
-.then(r => r.text())
-.then(data => {
-
-    rows = data
-        .trim()
-        .split('\n')
-        .slice(1)
-        .map(row => row.split(','));
-
-    showOptions(["A01","A02","A03","A04"]);
-});
-
-function showOptions(options){
+window.onload = function() {
+    document.getElementById("history").innerHTML = "Website is working";
 
     const optionsDiv = document.getElementById("options");
 
-    optionsDiv.innerHTML = "";
+    const btn = document.createElement("button");
+    btn.textContent = "Test Button";
 
-    options.forEach(option => {
-
-        const btn = document.createElement("button");
-
-        btn.textContent = option;
-
-        btn.onclick = () => {
-
-            document.getElementById("history").innerHTML +=
-                "<br>" + option;
-
-            const row =
-                rows.find(r => r[0].trim() === option);
-
-            if(!row){
-                optionsDiv.innerHTML =
-                    "<h3>End of branch</h3>";
-                return;
-            }
-
-            showOptions(
-                row.slice(1).filter(x => x && x.trim())
-            );
-        };
-
-        optionsDiv.appendChild(btn);
-    });
-}
-
+    optionsDiv.appendChild(btn);
+};
 </script>
