@@ -1,3 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Fantasy Draft Assistant</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin: 5px 0;
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>Fantasy Draft Assistant</h1>
+
+<div id="history">
+Current Picks:
+</div>
+
+<hr>
+
+<div id="options">
+</div>
+
 <script>
 
 const optionsDiv = document.getElementById("options");
@@ -16,7 +52,7 @@ function showOptions(options) {
         btn.onclick = () => {
 
             historyDiv.innerHTML =
-                "You selected: " + option;
+                "Last Pick: " + option;
 
             showOptions([
                 option + "-1",
@@ -38,3 +74,6 @@ showOptions([
 ]);
 
 </script>
+
+</body>
+</html>
