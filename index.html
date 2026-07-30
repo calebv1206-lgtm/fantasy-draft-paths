@@ -18,16 +18,32 @@ Current Picks:
 
 <script>
 
-const SHEET_URL = "REPLACE_WITH_GOOGLE_SHEET_CSV_URL";
+const SHEET_URL = "./draftpaths.csv";
 
-const data = {
-    "START": ["A01", "A02", "A03", "A04"],
+let data = {};
 
-    "A01": ["B01", "B02", "B03", "B04"],
-    "A02": ["B05", "B06", "B07", "B08"],
-    "A03": ["B09", "B10", "B11", "B12"],
-    "A04": ["B13", "B14", "B15", "B16"]
-};
+fetch(SHEET_URL)
+  .then(response => response.text())
+  .then(csv => {
+
+    const rows = csv.trim().split("\n");
+
+    rows.forEach(row => {
+
+      const cols = row.split(",");
+
+      const key = cols[0].trim();
+
+      const options = cols
+        .slice(1)
+        .map(x => x.trim())
+        .filter(x => x !== "");
+
+      data[key] = options;
+    });
+
+    showOptions("START");
+  });
 
 const optionsDiv = document.getElementById("options");
 const historyDiv = document.getElementById("history");
@@ -40,7 +56,7 @@ function showOptions(key) {
 
     const options = data[key];
 
-    if (!options) {
+    if (!options || options.length === 0) {
         optionsDiv.innerHTML = "<h3>End of Branch</h3>";
         return;
     }
@@ -65,8 +81,6 @@ function showOptions(key) {
         optionsDiv.appendChild(btn);
     });
 }
-
-showOptions("START");
 
 </script>
 
