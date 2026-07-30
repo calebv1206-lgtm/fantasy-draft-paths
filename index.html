@@ -28,9 +28,9 @@ fetch(SHEET_URL)
 
     const rows = csv.trim().split("\n");
 
-    rows.forEach(row => {
+    rows.slice(1).forEach(row => {
 
-      const cols = row.split(",");
+      const cols = row.split("\t");
 
       const key = cols[0].trim();
 
@@ -41,7 +41,8 @@ fetch(SHEET_URL)
 
       data[key] = options;
     });
-
+console.log(data);
+console.log(data["START"]);
     showOptions("START");
   });
 
